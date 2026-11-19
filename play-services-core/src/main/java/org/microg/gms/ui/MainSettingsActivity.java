@@ -66,6 +66,14 @@ public class MainSettingsActivity extends AppCompatActivity {
             settingsProvider.extendNavigation(getNavController());
         }
 
+        // Deep links are handled when the navigation host is created, before settings providers extended the graph,
+        // so links to their screens are handled again here.
+        NavController navController = getNavController();
+        if (savedInstanceState == null && intent.getData() != null && navController.getCurrentDestination() != null
+                && navController.getCurrentDestination().getId() == navController.getGraph().getStartDestinationId()) {
+            navController.handleDeepLink(intent);
+        }
+
         appBarConfiguration = new AppBarConfiguration.Builder(getNavController().getGraph()).build();
         NavigationUI.setupWithNavController(toolbarLayout, toolbar, getNavController(), appBarConfiguration);
         showDialogIfNeeded();
