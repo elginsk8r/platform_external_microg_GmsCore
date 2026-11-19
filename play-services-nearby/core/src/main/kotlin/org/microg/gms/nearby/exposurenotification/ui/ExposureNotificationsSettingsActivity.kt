@@ -21,9 +21,9 @@ class ExposureNotificationsSettingsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.exposure_notifications_settings_activity)
+        navController.setGraph(R.navigation.nav_nearby)
         appBarConfiguration = AppBarConfiguration.Builder(navController.graph).build()
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration!!)
-        navController.setGraph(R.navigation.nav_nearby)
     }
 
     override fun onSupportNavigateUp(): Boolean {
