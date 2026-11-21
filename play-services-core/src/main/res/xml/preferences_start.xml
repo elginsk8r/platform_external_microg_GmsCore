@@ -93,6 +93,11 @@
             android:key="pref_self_check"
             android:summary="@string/self_check_desc"
             android:title="@string/self_check_title" />
+        <SwitchPreferenceCompat
+            android:key="pref_hide_launcher_icon"
+            android:persistent="false"
+            android:title="@string/pref_hide_launcher_icon_title"
+            app:isPreferenceVisible="false" />
         <Preference
             android:icon="@drawable/ic_info_outline"
             android:key="pref_about"

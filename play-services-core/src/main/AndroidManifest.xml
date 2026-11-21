@@ -896,6 +896,15 @@
             </intent-filter>
         </activity-alias>
 
+        <receiver
+            android:name="org.microg.gms.ui.LauncherIconReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
         <activity
             android:name="org.microg.gms.ui.SettingsDashboardActivity"
             android:icon="@mipmap/ic_app_settings"

@@ -6,12 +6,14 @@
 package org.microg.gms.ui
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
+import androidx.preference.SwitchPreferenceCompat
 import com.google.android.gms.R
 import java.text.Collator
 import kotlinx.coroutines.Dispatchers
@@ -74,6 +76,20 @@ class SettingsFragment : ResourceSettingsFragment() {
         findPreference<Preference>(PREF_PASSKEYS)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             findNavController().navigate(requireContext(), R.id.passkeyManagerFragment)
             true
+        }
+        findPreference<SwitchPreferenceCompat>(PREF_HIDE_LAUNCHER_ICON)?.apply {
+            restoreLauncherIconIfNeeded(requireContext())
+            isVisible = canHideLauncherIcon(requireContext())
+            isChecked = isLauncherIconHidden(requireContext())
+            onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+                if (newValue == true && requireActivity().intent.component == getLauncherComponent(requireContext())) {
+                    // The task started through the launcher alias is removed when it is disabled, reopen in a new task
+                    startActivity(Intent(requireContext(), MainSettingsActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_MULTIPLE_TASK))
+                }
+                setLauncherIconHidden(requireContext(), newValue == true)
+                true
+            }
         }
 
         findPreference<Preference>(PREF_ABOUT)!!.apply {
@@ -237,6 +253,7 @@ class SettingsFragment : ResourceSettingsFragment() {
         const val PREF_GOOGLE_MORE = "pref_google_more"
         const val PREF_SELF_CHECK = "pref_self_check"
         const val PREF_SELF_CHECK_CARD = "pref_self_check_card"
+        const val PREF_HIDE_LAUNCHER_ICON = "pref_hide_launcher_icon"
 
         private const val UI_PREFERENCES = "org.microg.gms_settings_ui"
         private const val KEY_SELF_CHECK_WARNING_DISMISSED = "self_check_warning_dismissed"
