@@ -9,7 +9,6 @@ import android.accounts.Account
 import android.accounts.AccountManager
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
@@ -28,6 +27,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.widget.TextViewCompat
 import com.google.android.gms.R
 import org.microg.gms.accountsettings.ui.bridge.OcAdvertisingIdBridge
 import org.microg.gms.accountsettings.ui.bridge.OcAndroidIdBridge
@@ -54,6 +54,7 @@ import org.microg.gms.gcm.EXTRA_NOTIFICATION_ACCOUNT
 import org.microg.gms.people.PeopleManager
 import org.microg.gms.profile.Build.VERSION.SDK_INT
 import org.microg.gms.profile.ProfileManager
+import org.microg.gms.ui.resolveColor
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -221,18 +222,20 @@ class MainActivity : AppCompatActivity() {
                 } else { this }
             }
             val layout = RelativeLayout(this)
+            // Use the app theme colors, so the app bar blends with the window background
+            val backgroundColor = resolveColor(android.R.attr.colorBackground) ?: if (isNightMode()) Color.BLACK else Color.WHITE
+            val foregroundColor = resolveColor(com.google.android.material.R.attr.colorOnSurface) ?: if (isNightMode()) Color.WHITE else Color.BLACK
             val titleView = TextView(this).apply {
                 text = ContextCompat.getString(context, R.string.pref_accounts_title)
-                textSize = 20f
-                setTextColor(if(isNightMode()) Color.WHITE else Color.BLACK)
+                TextViewCompat.setTextAppearance(this, com.google.android.material.R.style.TextAppearance_Material3_TitleLarge)
+                setTextColor(foregroundColor)
                 maxLines = 1
                 ellipsize = TextUtils.TruncateAt.END
-                setTypeface(Typeface.create("sans-serif", Typeface.NORMAL))
                 layoutParams = Toolbar.LayoutParams(MATCH_PARENT, WRAP_CONTENT, Gravity.START)
             }
             val toolbar = Toolbar(this).apply {
                 id = View.generateViewId()
-                setBackgroundColor(if(isNightMode()) Color.BLACK else Color.WHITE)
+                setBackgroundColor(backgroundColor)
                 if (SDK_INT >= 21) {
                     backgroundTintList = null
                 }
@@ -240,7 +243,7 @@ class MainActivity : AppCompatActivity() {
                     addRule(RelativeLayout.ALIGN_PARENT_TOP)
                 }
                 val wrappedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_arrow_close)?.let { DrawableCompat.wrap(it) }?.apply {
-                    DrawableCompat.setTint(this, if (isNightMode()) Color.WHITE else Color.BLACK)
+                    DrawableCompat.setTint(this, foregroundColor)
                 }
                 navigationIcon = wrappedDrawable ?: ContextCompat.getDrawable(context, R.drawable.ic_arrow_close)
                 setNavigationOnClickListener { finishActivity() }

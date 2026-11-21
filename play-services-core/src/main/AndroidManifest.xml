@@ -223,7 +223,7 @@
             android:exported="true"
             android:label="@string/pick_place_title"
             android:process=":ui"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.App">
             <intent-filter>
                 <action android:name="com.google.android.gms.location.places.ui.PICK_PLACE" />
 
@@ -772,7 +772,7 @@
             android:name="org.microg.gms.games.ui.GamePlayDataActivity"
             android:process=":ui"
             android:exported="false"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.App"/>
 
         <activity
             android:name="org.microg.gms.games.ui.InGameUiActivity"
@@ -995,7 +995,7 @@
             android:process=":ui"
             android:exported="false"
             android:taskAffinity="org.microg.gms.settings"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.App">
             <intent-filter>
                 <action android:name="com.google.android.gms.accountsettings.MY_ACCOUNT" />
                 <action android:name="com.google.android.gms.accountsettings.ACCOUNT_PREFERENCES_SETTINGS" />
@@ -1148,7 +1148,7 @@
             android:enabled="true"
             android:exported="false"
             android:label="Google Payments"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:theme="@style/Theme.App"
             android:name="org.microg.gms.wallet.activity.DelegatorActivity"
             android:process=":ui"
             android:excludeFromRecents="true">
@@ -1382,7 +1382,7 @@
             android:exported="true"
             android:process=":ui"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:theme="@style/Theme.App">
             <intent-filter>
                 <action android:name="com.google.android.gms.mlkit.ACTION_SCAN_BARCODE" />
 

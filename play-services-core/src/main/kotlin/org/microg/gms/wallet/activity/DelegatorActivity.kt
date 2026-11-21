@@ -35,6 +35,7 @@ import org.microg.gms.wallet.EXTRA_BENDER3_BUYFLOW_CONFIG
 import org.microg.gms.wallet.EXTRA_BENDER3_ENCRYPTED_PARAMS
 import org.microg.gms.wallet.EXTRA_BENDER3_O2_ACTION_TOKEN
 import org.microg.gms.wallet.EXTRA_BENDER3_UNENCRYPTED_PARAMS
+import org.microg.gms.ui.MicrogTheme
 import org.microg.vending.billing.proto.FinishActionParams
 import org.microg.vending.billing.proto.IapResponseWrapper
 import org.microg.vending.billing.proto.ResultCode
@@ -127,7 +128,7 @@ class DelegatorActivity : ComponentActivity() {
         setContent {
             val paymentState by paymentContext.paymentState.collectAsState()
             
-            MaterialTheme {
+            MicrogTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
