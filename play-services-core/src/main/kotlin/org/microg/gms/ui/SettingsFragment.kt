@@ -5,6 +5,7 @@
 
 package org.microg.gms.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import com.google.android.gms.R
 import java.text.Collator
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.microg.gms.checkin.CheckinPreferences
 import org.microg.gms.gcm.GcmDatabase
 import org.microg.gms.gcm.GcmPrefs
@@ -57,6 +61,10 @@ class SettingsFragment : ResourceSettingsFragment() {
         }
         findPreference<Preference>(PREF_GAMES)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             findNavController().navigate(requireContext(), R.id.gameManagerFragment)
+            true
+        }
+        findPreference<Preference>(PREF_SELF_CHECK)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(requireContext(), R.id.selfcheckFragment)
             true
         }
         findPreference<Preference>(PREF_GOOGLE_MORE)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
@@ -178,6 +186,28 @@ class SettingsFragment : ResourceSettingsFragment() {
             if (!checkinEnabled) preference.setSummary(R.string.pref_requires_checkin_summary)
         }
 
+        lifecycleScope.launch {
+            val passed = withContext(Dispatchers.IO) { SelfCheckFragment.basicChecksPassed(context) }
+            // A dismissed warning stays hidden until the basic checks pass again
+            val uiPreferences = context.getSharedPreferences(UI_PREFERENCES, Context.MODE_PRIVATE)
+            if (passed) uiPreferences.edit().remove(KEY_SELF_CHECK_WARNING_DISMISSED).apply()
+            findPreference<IssueCardPreference>(PREF_SELF_CHECK_CARD)?.apply {
+                label = getString(org.microg.tools.ui.R.string.self_check_title)
+                title = getString(if (passed) R.string.self_check_card_ok_title else R.string.self_check_card_warn_title)
+                summary = getString(if (passed) R.string.self_check_card_ok_summary else R.string.self_check_card_warn_summary)
+                buttonText = getString(R.string.self_check_card_button)
+                positive = passed
+                onButtonClick = { findNavController().navigate(requireContext(), R.id.selfcheckFragment) }
+                onDismiss = if (passed) null else {
+                    {
+                        uiPreferences.edit().putBoolean(KEY_SELF_CHECK_WARNING_DISMISSED, true).apply()
+                        isVisible = false
+                    }
+                }
+                isVisible = passed || !uiPreferences.getBoolean(KEY_SELF_CHECK_WARNING_DISMISSED, false)
+            }
+        }
+
         lifecycleScope.launchWhenResumed {
             val entries = getAllSettingsProviders(requireContext()).flatMap { it.getEntriesDynamic(requireContext()) }
             for (preference in createdPreferences) {
@@ -205,6 +235,11 @@ class SettingsFragment : ResourceSettingsFragment() {
         const val PREF_GAMES = "pref_games"
         const val PREF_PASSKEYS = "pref_passkeys"
         const val PREF_GOOGLE_MORE = "pref_google_more"
+        const val PREF_SELF_CHECK = "pref_self_check"
+        const val PREF_SELF_CHECK_CARD = "pref_self_check_card"
+
+        private const val UI_PREFERENCES = "org.microg.gms_settings_ui"
+        private const val KEY_SELF_CHECK_WARNING_DISMISSED = "self_check_warning_dismissed"
 
         private const val PREFCAT_HEADER = "prefcat_header"
         private const val PREFCAT_FOOTER = "prefcat_footer"

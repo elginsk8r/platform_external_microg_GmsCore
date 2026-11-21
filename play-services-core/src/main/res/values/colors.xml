@@ -71,4 +71,15 @@
     <color name="gm3_ref_palette_tertiary80">#ff6dd58c</color>
     <color name="gm3_ref_palette_tertiary90">#ffc4eed0</color>
     <color name="gm3_ref_palette_white">#ffffffff</color>
+
+    <!-- Self-check status, matching Safety Center -->
+    <color name="self_check_ok">#34A853</color>
+    <color name="self_check_ok_mark">#FFFFFF</color>
+    <color name="self_check_warn">#FBBC04</color>
+    <color name="self_check_warn_mark">#202124</color>
+
+    <!-- Self-check issue card, matching Safety Center -->
+    <color name="issue_card_button_ok">#5BB974</color>
+    <color name="issue_card_button_warn">#FCC934</color>
+    <color name="issue_card_button_text">#202124</color>
 </resources>

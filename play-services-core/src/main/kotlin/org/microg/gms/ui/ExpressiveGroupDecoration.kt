@@ -42,7 +42,7 @@ class ExpressiveGroupDecoration(context: Context) : RecyclerView.ItemDecoration(
 
     private fun isGroupDivider(preference: Preference) = preference is PreferenceCategory ||
             preference is FooterPreference || preference is TopIntroPreference || preference is SwitchBarPreference ||
-            preference is WarningCardPreference || preference is AppHeadingPreference ||
+            preference is IssueCardPreference || preference is WarningCardPreference || preference is AppHeadingPreference ||
             (!preference.isSelectable && preference.title.isNullOrEmpty())
 
     private fun buildPositionStates(adapter: PreferenceGroupAdapter): IntArray {

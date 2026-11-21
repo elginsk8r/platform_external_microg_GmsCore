@@ -16,6 +16,9 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <org.microg.gms.ui.IssueCardPreference
+        android:key="pref_self_check_card"
+        app:isPreferenceVisible="false" />
     <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_header" />
     <PreferenceCategory
         android:key="prefcat_google_apps"
@@ -87,12 +90,9 @@
         android:title="@string/gms_app_name">
         <Preference
             android:icon="@drawable/ic_check_list"
+            android:key="pref_self_check"
             android:summary="@string/self_check_desc"
-            android:title="@string/self_check_title">
-            <intent
-                android:targetClass="org.microg.gms.ui.SelfCheckFragment$AsActivity"
-                android:targetPackage="@string/package_id" />
-        </Preference>
+            android:title="@string/self_check_title" />
         <Preference
             android:icon="@drawable/ic_info_outline"
             android:key="pref_about"
