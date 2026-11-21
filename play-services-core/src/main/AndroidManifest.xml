@@ -941,6 +941,10 @@
             <meta-data
                 android:name="com.android.settings.icon"
                 android:resource="@drawable/ic_app_settings_system" />
+            <!-- Closest Settings homepage color scheme to the microG teal -->
+            <meta-data
+                android:name="com.android.settings.icon_color_scheme"
+                android:value="cyan" />
             <meta-data
                 android:name="com.android.settings.title"
                 android:resource="@string/gms_settings_name" />
