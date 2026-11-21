@@ -533,7 +533,7 @@
             android:excludeFromRecents="true"
             android:exported="false"
             android:process=":ui"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog" />
+            android:theme="@style/Theme.App.DayNight.Dialog.Alert.NoActionBar" />
 
         <activity
             android:name="org.microg.gms.auth.AskPackageOverrideActivity"
@@ -674,7 +674,7 @@
             android:excludeFromRecents="true"/>
 
         <activity
-            android:theme="@style/Theme.AppCompat.Dialog.Alert"
+            android:theme="@style/ThemeTranslucentCommon"
             android:name="org.microg.gms.auth.signin.AssistedSignInActivity"
             android:enabled="true"
             android:exported="true"
@@ -694,7 +694,7 @@
             android:exported="false"
             android:excludeFromRecents="true"
             android:configChanges="keyboardHidden|keyboard|orientation|screenSize"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog"/>
+            android:theme="@style/Theme.App.DayNight.Dialog.Alert.NoActionBar"/>
 
         <activity
             android:name="org.microg.gms.accountaction.AccountActionActivity"
@@ -781,7 +781,7 @@
             android:excludeFromRecents="false"
             android:exported="true"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Dialog.Alert">
+            android:theme="@style/ThemeTranslucentCommon">
             <intent-filter>
                 <action android:name="com.google.android.gms.games.SHOW_SELECT_SNAPSHOT"/>
                 <action android:name="com.google.android.gms.games.VIEW_ACHIEVEMENTS" />
@@ -802,7 +802,7 @@
         <activity
             android:name="org.microg.gms.games.UpgradeActivity"
             android:process=":ui"
-            android:theme="@style/Theme.AppCompat.DayNight.Dialog">
+            android:theme="@style/Theme.App.DayNight.Dialog.Alert.NoActionBar">
             <intent-filter>
                 <action android:name="com.google.android.gms.games.PLAY_GAMES_UPGRADE" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -1135,7 +1135,7 @@
             android:enabled="true"
             android:exported="true"
             android:label="Google Payments"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:theme="@style/Theme.App.Translucent"
             android:name="org.microg.gms.wallet.pm.PurchaseManagerActivity"
             android:process=":ui"
             android:excludeFromRecents="true">
@@ -1260,7 +1260,7 @@
             android:exported="true"
             android:process=":ui"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.Translucent"/>
+            android:theme="@style/Theme.App.Translucent"/>
 
         <service android:name="org.microg.gms.clearcut.ClearcutLoggerService">
             <intent-filter>
