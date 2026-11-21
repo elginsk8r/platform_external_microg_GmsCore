@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ SPDX-FileCopyrightText: 2026 microG Project Team
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+
+<resources>
+    <!-- Expressive theme: preference cards on a surface container background -->
+    <style name="Theme.App" parent="Theme.Base.DayNight.NoActionBar">
+        <item name="android:colorBackground">?attr/colorSurfaceContainer</item>
+        <item name="appBarLayoutStyle">@style/Theme.App.AppBarLayout</item>
+        <item name="collapsingToolbarLayoutLargeStyle">@style/Theme.App.CollapsingToolbar.Large</item>
+    </style>
+
+    <style name="Theme.App.AppBarLayout" parent="Widget.Material3.AppBarLayout">
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Theme.App.CollapsingToolbar.Large" parent="Widget.Material3.CollapsingToolbar.Large">
+        <item name="contentScrim">?android:attr/colorBackground</item>
+    </style>
+</resources>

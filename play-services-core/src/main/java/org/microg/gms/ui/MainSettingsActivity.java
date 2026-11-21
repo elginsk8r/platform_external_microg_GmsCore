@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -13,10 +14,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.gms.BuildConfig;
 import com.google.android.gms.R;
@@ -66,6 +70,17 @@ public class MainSettingsActivity extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             enableEdgeToEdge();
+        }
+        if (Build.VERSION.SDK_INT >= 36) {
+            // Expressive theme: show preference groups as rounded cards
+            getSupportFragmentManager().registerFragmentLifecycleCallbacks(new FragmentManager.FragmentLifecycleCallbacks() {
+                @Override
+                public void onFragmentViewCreated(@NonNull FragmentManager fm, @NonNull Fragment f, @NonNull View v, @Nullable Bundle savedInstanceState) {
+                    if (f instanceof PreferenceFragmentCompat) {
+                        ((PreferenceFragmentCompat) f).getListView().addItemDecoration(new ExpressiveGroupDecoration(f.requireContext()));
+                    }
+                }
+            }, true);
         }
 
         Toolbar toolbar = findViewById(R.id.toolbar);
