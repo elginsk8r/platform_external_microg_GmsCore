@@ -14,12 +14,15 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.gms.BuildConfig;
@@ -32,11 +35,12 @@ import org.microg.gms.ui.settings.SettingsProvider;
 import static org.microg.gms.ui.UtilsKt.buildAlertDialog;
 import static org.microg.gms.ui.settings.SettingsProviderKt.getAllSettingsProviders;
 
-public class MainSettingsActivity extends AppCompatActivity {
+public class MainSettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceDisplayDialogCallback {
     private AppBarConfiguration appBarConfiguration;
 
     private static final String FIRST_RUN_MASTER = "org.microg.gms_firstRun";
     private static final String FIRST_RUN_PREF = "as_run";
+    private static final String DIALOG_FRAGMENT_TAG = "androidx.preference.PreferenceFragment.DIALOG";
 
     private NavController getNavController() {
         return ((NavHostFragment)getSupportFragmentManager().findFragmentById(R.id.navhost)).getNavController();
@@ -118,6 +122,19 @@ public class MainSettingsActivity extends AppCompatActivity {
                     .setInsets(types, Insets.of(0, insets.top, 0, 0))
                     .build();
         });
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean onPreferenceDisplayDialog(@NonNull PreferenceFragmentCompat caller, @NonNull Preference pref) {
+        if (!(pref instanceof ListPreference)) return false;
+        // Use a Material dialog, the preference library only uses the AppCompat one
+        if (caller.getParentFragmentManager().findFragmentByTag(DIALOG_FRAGMENT_TAG) != null) return true;
+        DialogFragment dialog = MaterialListPreferenceDialogFragment.Companion.newInstance(pref.getKey());
+        // Preference dialogs find their preference through the target fragment
+        dialog.setTargetFragment(caller, 0);
+        dialog.show(caller.getParentFragmentManager(), DIALOG_FRAGMENT_TAG);
+        return true;
     }
 
     @Override
