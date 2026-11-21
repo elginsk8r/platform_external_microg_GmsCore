@@ -24,7 +24,6 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +33,7 @@ import com.google.android.gms.games.snapshot.SnapshotMetadataEntity
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -286,7 +286,7 @@ class GamesUiFragment : BottomSheetDialogFragment() {
                     activity?.setResult(RESULT_OK, intent)
                     activity?.finish()
                 } else {
-                    AlertDialog.Builder(context).apply {
+                    MaterialAlertDialogBuilder(context).apply {
                         setTitle(getString(R.string.games_delete_snapshot_dialog_title))
                         setMessage(getString(R.string.games_delete_snapshot_dialog_message))
                     }.setNegativeButton(getString(R.string.games_delete_snapshot_dialog_cancel)) { dialog, _ ->

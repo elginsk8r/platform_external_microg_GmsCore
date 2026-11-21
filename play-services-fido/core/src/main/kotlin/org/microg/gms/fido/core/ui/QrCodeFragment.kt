@@ -23,11 +23,11 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.microg.gms.fido.core.R
 import org.microg.gms.fido.core.RequestOptionsType
 import org.microg.gms.fido.core.databinding.FidoQrCodeFragmentBinding
@@ -224,7 +224,7 @@ class QrCodeFragment : Fragment(), TransportHandlerCallback {
     }
 
     private fun showPermissionSettingsDialog() {
-        AlertDialog.Builder(requireContext()).setTitle(getString(R.string.fido_ble_permission_title)).setMessage(getString(R.string.fido_ble_permission_permanently_denied))
+        MaterialAlertDialogBuilder(requireContext()).setTitle(getString(R.string.fido_ble_permission_title)).setMessage(getString(R.string.fido_ble_permission_permanently_denied))
             .setPositiveButton(getString(R.string.fido_action_go_to_settings)) { _, _ ->
                 try {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {

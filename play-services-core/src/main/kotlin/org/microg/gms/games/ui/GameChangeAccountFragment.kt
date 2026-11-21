@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -24,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.R
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import org.json.JSONObject
 import org.microg.gms.games.GAMES_PACKAGE_NAME
@@ -217,7 +217,7 @@ class GameChangeAccountFragment : Fragment() {
     }
 
     private fun chooseAccountDialog(changeAllGames: Boolean) {
-        AlertDialog.Builder(requireContext()).setTitle(requireContext().getString(R.string.credentials_assisted_choose_account_label)).setItems(allPlayers.map {
+        MaterialAlertDialogBuilder(requireContext()).setTitle(requireContext().getString(R.string.credentials_assisted_choose_account_label)).setItems(allPlayers.map {
             "${it.first.name} (${it.second})"
         }.toTypedArray()) { _, which ->
             lifecycleScope.launchWhenStarted {

@@ -13,12 +13,12 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.R
 import com.google.android.gms.common.internal.safeparcel.SafeParcelableSerializer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.microg.gms.vision.barcode.QRCodeScannerView
 
 private const val KEY_CALLING_APP_NAME = "extra_calling_app_name"
@@ -78,7 +78,7 @@ class BarcodeScanningActivity : AppCompatActivity() {
     }
 
     private fun showPermissionDialog(callingApp: String?) {
-        AlertDialog.Builder(this).apply {
+        MaterialAlertDialogBuilder(this).apply {
             setTitle(getString(R.string.camera_permission_dialog_title))
             setMessage(String.format(getString(R.string.camera_permission_dialog_message), callingApp))
             setPositiveButton(getString(R.string.camera_permission_dialog_button)){ dialog, _ ->

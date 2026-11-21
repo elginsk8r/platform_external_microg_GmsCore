@@ -16,7 +16,6 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -25,6 +24,7 @@ import com.google.android.gms.R
 import com.google.android.gms.common.Scopes
 import com.google.android.gms.common.api.Scope
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.squareup.wire.GrpcClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -224,7 +224,7 @@ class GameDeletePlayAccountFragment : Fragment() {
     private fun handleMultiPlayer(players: List<Pair<Account, String>>) {
         currentChooseBtn.visibility = View.VISIBLE
         currentChooseBtn.setOnClickListener {
-            AlertDialog.Builder(requireContext()).setTitle(requireContext().getString(R.string.credentials_assisted_choose_account_label)).setItems(players.map {
+            MaterialAlertDialogBuilder(requireContext()).setTitle(requireContext().getString(R.string.credentials_assisted_choose_account_label)).setItems(players.map {
                 "${it.first.name} (${it.second})"
             }.toTypedArray()) { _, which ->
                 loadingBar.visibility = View.VISIBLE

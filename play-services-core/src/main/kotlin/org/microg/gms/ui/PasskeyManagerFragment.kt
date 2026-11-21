@@ -11,13 +11,13 @@ import android.text.format.DateUtils
 import android.util.Base64
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.gms.R
 import com.google.android.gms.fido.fido2.api.common.PublicKeyCredentialUserEntity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.microg.gms.fido.core.Database
@@ -77,7 +77,7 @@ class PasskeyManagerFragment : PreferenceFragmentCompat() {
 
     private fun confirmDelete(item: KnownRegistration) {
         val displayUser = formatPasskeyUser(requireContext(), item.userJson)
-        AlertDialog.Builder(requireContext())
+        MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.pref_passkey_manager_delete_dialog_title)
             .setMessage(getString(R.string.pref_passkey_manager_delete_dialog_message, item.rpId, displayUser))
             .setNegativeButton(android.R.string.cancel, null)
