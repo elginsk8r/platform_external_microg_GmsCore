@@ -41,12 +41,10 @@
             tools:summary="@string/pref_test_summary_passed" />
     </PreferenceCategory>
     <PreferenceCategory android:layout="@layout/preference_category_no_label">
-        <Preference
+        <org.microg.gms.ui.WarningCardPreference
             app:isPreferenceVisible="false"
             tools:isPreferenceVisible="true"
-            android:icon="@drawable/ic_circle_warn"
             android:key="pref_droidguard_unsupported"
-            android:selectable="false"
             android:summary="@string/pref_droidguard_unsupported_summary" />
         <org.microg.gms.ui.FooterPreference
             android:key="pref_safetynet_summary"
