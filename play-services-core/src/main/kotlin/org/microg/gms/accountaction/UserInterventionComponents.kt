@@ -97,8 +97,9 @@ fun UserInterventionCommonComponent(title: String, description: String, sequence
         val color = if (completed) {
             colorResource(id = R.color.material_success)
         } else {
-            colorResource(id = R.color.login_blue_theme_primary)
+            MaterialTheme.colorScheme.primary
         }
+        val contentColor = if (completed) Color.White else MaterialTheme.colorScheme.onPrimary
 
         Column(
             Modifier
@@ -118,20 +119,20 @@ fun UserInterventionCommonComponent(title: String, description: String, sequence
                             imageVector = Icons.Default.Check,
                             contentDescription = stringResource(R.string.auth_action_step_completed_content_description),
                             modifier = Modifier.align(Alignment.Center),
-                            tint = Color.White
+                            tint = contentColor
                         )
                     } else {
                         if (sequenceNumber == null) {
                             Canvas(modifier = Modifier.size(12.dp).align(Alignment.Center)) {
                                 drawCircle(
-                                    color = Color.White
+                                    color = contentColor
                                 )
                             }
                         } else {
                             Text(
                                 text = sequenceNumber.toString(),
                                 modifier = Modifier.align(Alignment.Center),
-                                style = LocalTextStyle.current.copy(color = Color.White)
+                                style = LocalTextStyle.current.copy(color = contentColor)
                             )
                         }
                     }

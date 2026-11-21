@@ -83,6 +83,7 @@ import static org.microg.gms.common.Constants.GMS_VERSION_CODE;
 import static org.microg.gms.common.Constants.VENDING_PACKAGE_NAME;
 import static org.microg.gms.gcm.ExtensionsKt.ACTION_GCM_REGISTER_ACCOUNT;
 import static org.microg.gms.gcm.ExtensionsKt.KEY_GCM_REGISTER_ACCOUNT_NAME;
+import static org.microg.gms.ui.UtilsKt.buildAlertDialog;
 
 public class LoginActivity extends AssistantActivity {
     public static final String TMPL_NEW_ACCOUNT = "new_account";
@@ -193,10 +194,23 @@ public class LoginActivity extends AssistantActivity {
         } else if (android.os.Build.VERSION.SDK_INT < 21 || isReAuth) {
             init();
         } else {
-            setMessage(R.string.auth_before_connect);
-            setBackButtonText(android.R.string.cancel);
-            setNextButtonText(R.string.auth_sign_in);
+            setBackButtonText(null);
+            setNextButtonText(null);
+            showBeforeConnectDialog();
         }
+    }
+
+    private void showBeforeConnectDialog() {
+        buildAlertDialog(this)
+                .setTitle(R.string.auth_sign_in)
+                .setMessage(R.string.auth_before_connect)
+                .setPositiveButton(R.string.auth_sign_in, (dialog, which) -> {
+                    state = 1;
+                    init();
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> loginCanceled())
+                .setOnCancelListener(dialog -> loginCanceled())
+                .show();
     }
 
     @Override

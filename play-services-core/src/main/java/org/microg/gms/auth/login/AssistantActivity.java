@@ -16,11 +16,8 @@
 
 package org.microg.gms.auth.login;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -32,14 +29,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.R;
 
 public abstract class AssistantActivity extends AppCompatActivity {
-    private static final int TITLE_MIN_HEIGHT = 64;
-    private static final double TITLE_WIDTH_FACTOR = (8.0 / 18.0);
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_assistant);
-        formatTitle();
         findViewById(R.id.next_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,17 +45,6 @@ public abstract class AssistantActivity extends AppCompatActivity {
                 onBackButtonClicked();
             }
         });
-    }
-
-    @SuppressLint("WrongViewCast")
-    private void formatTitle() {
-        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-            double widthPixels = (double) (getResources().getDisplayMetrics().widthPixels);
-            findViewById(R.id.title_container).getLayoutParams().height =
-                    (int) (dpToPx(TITLE_MIN_HEIGHT) + (TITLE_WIDTH_FACTOR * widthPixels));
-        } else {
-            findViewById(R.id.title_container).getLayoutParams().height = dpToPx(TITLE_MIN_HEIGHT);
-        }
     }
 
     public void setNextButtonText(@StringRes int res) {
@@ -100,19 +82,8 @@ public abstract class AssistantActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        formatTitle();
-    }
-
-    @Override
     protected void onTitleChanged(CharSequence title, int color) {
         super.onTitleChanged(title, color);
         ((TextView) findViewById(R.id.title)).setText(title);
-    }
-
-    public int dpToPx(int dp) {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        return Math.round(dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT));
     }
 }
