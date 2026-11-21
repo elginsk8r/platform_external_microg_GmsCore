@@ -506,11 +506,13 @@ public final class SafeParcelReflectionUtil {
                 if (clazz == List.class || clazz == ArrayList.class) {
                     listItemClass = getListItemClass(field);
                     if (listItemClass == String.class && !useValueParcel) return SafeParcelType.StringList;
-                    if (listItemClass == Integer.class && annotation.useDirectList()) return SafeParcelType.IntegerList;
-                    if (listItemClass == Boolean.class && annotation.useDirectList()) return SafeParcelType.BooleanList;
-                    if (listItemClass == Long.class && annotation.useDirectList()) return SafeParcelType.LongList;
-                    if (listItemClass == Float.class && annotation.useDirectList()) return SafeParcelType.FloatList;
-                    if (listItemClass == Double.class && annotation.useDirectList()) return SafeParcelType.DoubleList;
+                    // Legacy annotation has no direct list option
+                    boolean useDirectList = annotation != null && annotation.useDirectList();
+                    if (listItemClass == Integer.class && useDirectList) return SafeParcelType.IntegerList;
+                    if (listItemClass == Boolean.class && useDirectList) return SafeParcelType.BooleanList;
+                    if (listItemClass == Long.class && useDirectList) return SafeParcelType.LongList;
+                    if (listItemClass == Float.class && useDirectList) return SafeParcelType.FloatList;
+                    if (listItemClass == Double.class && useDirectList) return SafeParcelType.DoubleList;
                     return SafeParcelType.List;
                 }
                 if (clazz == Map.class || clazz == HashMap.class)
