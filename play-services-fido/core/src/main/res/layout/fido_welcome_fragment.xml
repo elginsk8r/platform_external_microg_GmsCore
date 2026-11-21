@@ -39,26 +39,26 @@
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
             android:text="@{@string/fido_welcome_title(data.appName)}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
             tools:text="@string/fido_welcome_title" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{@string/fido_welcome_body(data.appName)}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
             tools:text="@string/fido_welcome_body" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
             android:visibility="@{data.privilegedCallerName != null ? View.VISIBLE : View.GONE}"
             android:text="@{@string/fido_welcome_privileged_info(data.privilegedCallerName, data.appName)}"
             tools:text="@string/fido_welcome_privileged_info" />
 
-        <androidx.appcompat.widget.SwitchCompat
+        <com.google.android.material.materialswitch.MaterialSwitch
             android:id="@+id/privilegedCheck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -76,7 +76,7 @@
 
             <Button
                 android:id="@android:id/button1"
-                style="@style/Widget.AppCompat.Button.Colored"
+                style="@style/Widget.Material3.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:enabled="@{privilegedCheck.checked || !data.requiresPrivilege}"

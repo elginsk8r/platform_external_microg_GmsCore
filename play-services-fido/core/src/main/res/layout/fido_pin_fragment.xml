@@ -37,7 +37,7 @@
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
             android:text="@string/fido_pin_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+            android:textAppearance="?attr/textAppearanceTitleLarge" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fido_pin_cancel"
                 android:onClick="@{onCancel}"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+                style="@style/Widget.Material3.Button.TextButton" />
 
             <Button
                 android:id="@+id/pin_fragment_ok"
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/fido_pin_ok"
                 android:onClick="@{onEnterPin}"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+                style="@style/Widget.Material3.Button.TextButton" />
 
         </LinearLayout>
     </LinearLayout>

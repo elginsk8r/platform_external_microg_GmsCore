@@ -28,7 +28,7 @@
             android:id="@+id/sign_in_key_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textAppearance="?attr/textAppearanceBodyLarge"
             tools:text="User name" />
 
         <TextView
@@ -36,7 +36,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingVertical="2dp"
-            android:textSize="12sp"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorSecondary"
             tools:text="User id" />
 
         <TextView
@@ -44,6 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/fido_sign_in_selection_description"
-            android:textSize="12sp" />
+            android:textAppearance="?attr/textAppearanceBodyMedium"
+            android:textColor="?android:attr/textColorSecondary" />
     </LinearLayout>
 </LinearLayout>

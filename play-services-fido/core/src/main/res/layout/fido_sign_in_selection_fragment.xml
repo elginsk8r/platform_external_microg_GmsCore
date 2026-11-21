@@ -39,7 +39,7 @@
             android:gravity="center"
             android:textSize="24dp"
             android:text="@string/fido_sign_in_selection_title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
             tools:text="@string/fido_sign_in_selection_title" />
 
         <TextView
@@ -48,7 +48,7 @@
             android:gravity="center"
             android:textSize="18dp"
             android:text="@{@string/fido_sign_in_selection_continue(data.appName)}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
             tools:text="@string/fido_sign_in_selection_continue" />
 
         <androidx.recyclerview.widget.RecyclerView

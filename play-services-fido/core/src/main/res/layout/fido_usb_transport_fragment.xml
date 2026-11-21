@@ -52,7 +52,7 @@
             android:paddingTop="24dp"
             android:paddingBottom="8dp"
             android:text="@{data.isFirst ? @string/fido_welcome_title(data.appName) : @string/fido_usb_title}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textAppearance="?attr/textAppearanceTitleLarge"
             tools:text="@string/fido_usb_title" />
 
         <TextView
@@ -60,14 +60,14 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:text="@string/fido_usb_prompt_body"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textAppearance="?attr/textAppearanceBodyMedium" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@{@string/fido_welcome_body(data.appName)}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textAppearance="?attr/textAppearanceBodyMedium"
             android:visibility="@{data.isFirst ? View.VISIBLE : View.GONE}"
             tools:text="@string/fido_welcome_body" />
 
@@ -135,7 +135,7 @@
 
             <Button
                 android:id="@android:id/button1"
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:minHeight="0dp"

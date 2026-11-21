@@ -143,7 +143,7 @@ class AuthenticatorActivity : AppCompatActivity(), TransportHandlerCallback {
                 }
             }
 
-            setTheme(androidx.appcompat.R.style.Theme_AppCompat_DayNight_NoActionBar)
+            setTheme(org.microg.gms.base.core.R.style.Theme_App)
             setContentView(R.layout.fido_authenticator_activity)
 
             lifecycleScope.launchWhenCreated {
