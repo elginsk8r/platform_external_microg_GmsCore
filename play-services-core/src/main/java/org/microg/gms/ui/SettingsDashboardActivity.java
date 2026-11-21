@@ -16,24 +16,20 @@
 
 package org.microg.gms.ui;
 
-import androidx.fragment.app.Fragment;
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 
-import com.google.android.gms.R;
+import androidx.annotation.Nullable;
 
-//import org.microg.nlp.Preferences;
-import org.microg.tools.ui.AbstractDashboardActivity;
-
-public class SettingsDashboardActivity extends AbstractDashboardActivity {
-
-    public SettingsDashboardActivity() {
-        preferencesResource = R.xml.preferences_start;
-        addCondition(Conditions.GCM_BATTERY_OPTIMIZATIONS);
-        addCondition(Conditions.PERMISSIONS);
-    }
-
+/**
+ * Legacy settings dashboard, opens microG Settings.
+ */
+public class SettingsDashboardActivity extends Activity {
     @Override
-    protected Fragment getFragment() {
-        return new SettingsFragment();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        startActivity(new Intent(this, MainSettingsActivity.class));
+        finish();
     }
-
 }

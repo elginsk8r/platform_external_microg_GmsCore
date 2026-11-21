@@ -16,18 +16,20 @@
 
 package org.microg.gms.ui;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.CrossProfileApps;
 import android.content.pm.PackageManager;
 import android.content.pm.PermissionInfo;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
 
 import org.microg.gms.common.Constants;
 import org.microg.tools.selfcheck.InstalledPackagesChecks;
@@ -38,7 +40,6 @@ import org.microg.tools.selfcheck.RomSpoofSignatureChecks;
 import org.microg.tools.selfcheck.SelfCheckGroup;
 import org.microg.tools.selfcheck.SystemChecks;
 import org.microg.tools.ui.AbstractSelfCheckFragment;
-import org.microg.tools.ui.AbstractSettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -136,14 +137,15 @@ public class SelfCheckFragment extends AbstractSelfCheckFragment {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    public static class AsActivity extends AbstractSettingsActivity {
-        public AsActivity() {
-            showHomeAsUp = true;
-        }
-
+    /**
+     * Opens self-check in microG Settings.
+     */
+    public static class AsActivity extends Activity {
         @Override
-        protected Fragment getFragment() {
-            return new SelfCheckFragment();
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("x-gms-settings://self-check"), this, MainSettingsActivity.class));
+            finish();
         }
     }
 }

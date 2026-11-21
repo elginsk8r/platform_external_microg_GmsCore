@@ -4,29 +4,21 @@
  */
 package org.microg.gms.nearby.exposurenotification.ui
 
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.NavigationUI
-import org.microg.gms.nearby.core.R
+import com.google.android.gms.nearby.exposurenotification.ExposureNotificationClient
 
-class ExposureNotificationsSettingsActivity : AppCompatActivity() {
-    private var appBarConfiguration: AppBarConfiguration? = null
-
-    private val navController: NavController
-        get() = (supportFragmentManager.findFragmentById(R.id.navhost) as NavHostFragment?)!!.navController
-
+/**
+ * Opens the exposure notification settings in microG Settings.
+ */
+class ExposureNotificationsSettingsActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.exposure_notifications_settings_activity)
-        navController.setGraph(R.navigation.nav_nearby)
-        appBarConfiguration = AppBarConfiguration.Builder(navController.graph).build()
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration!!)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return NavigationUI.navigateUp(navController, appBarConfiguration!!) || super.onSupportNavigateUp()
+        startActivity(Intent(ExposureNotificationClient.ACTION_EXPOSURE_NOTIFICATION_SETTINGS)
+            .setClassName(packageName, "org.microg.gms.ui.MainSettingsActivity")
+            .setData(Uri.parse("x-gms-settings://exposure-notifications")))
+        finish()
     }
 }

@@ -902,7 +902,8 @@
             android:label="Legacy microG Settings"
             android:process=":ui"
             android:roundIcon="@mipmap/ic_app_settings"
-            android:taskAffinity="org.microg.gms.settings" />
+            android:taskAffinity="org.microg.gms.settings"
+            android:theme="@android:style/Theme.NoDisplay" />
 
         <!-- microG Settings activity-alias for Google settings compatibility -->
         <activity-alias
@@ -931,13 +932,15 @@
             android:name="org.microg.gms.ui.GoogleMoreFragment$AsActivity"
             android:label="@string/gms_settings_name"
             android:process=":ui"
-            android:taskAffinity="org.microg.gms.settings" />
+            android:taskAffinity="org.microg.gms.settings"
+            android:theme="@android:style/Theme.NoDisplay" />
 
         <activity
             android:name="org.microg.gms.ui.SelfCheckFragment$AsActivity"
             android:label="@string/self_check_title"
             android:process=":ui"
-            android:taskAffinity="org.microg.gms.settings" />
+            android:taskAffinity="org.microg.gms.settings"
+            android:theme="@android:style/Theme.NoDisplay" />
 
         <activity
             android:name="org.microg.gms.accountsettings.ui.MainActivity"

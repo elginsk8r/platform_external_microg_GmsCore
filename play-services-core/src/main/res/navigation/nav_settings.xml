@@ -45,7 +45,9 @@
     <fragment
         android:id="@+id/selfcheckFragment"
         android:name="org.microg.gms.ui.SelfCheckFragment"
-        android:label="@string/self_check_title" />
+        android:label="@string/self_check_title">
+        <deepLink app:uri="x-gms-settings://self-check" />
+    </fragment>
 
     <!-- Account -->
 
@@ -201,7 +203,9 @@
     <fragment
         android:id="@+id/googleMoreFragment"
         android:name="org.microg.gms.ui.GoogleMoreFragment"
-        android:label="@string/gms_settings_name" />
+        android:label="@string/gms_settings_name">
+        <deepLink app:uri="x-gms-settings://google-more" />
+    </fragment>
 
     <!-- About -->
 

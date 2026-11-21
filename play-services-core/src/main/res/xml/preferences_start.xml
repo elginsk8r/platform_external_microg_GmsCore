@@ -56,11 +56,7 @@
             android:icon="@drawable/dots_horizontal"
             android:key="pref_google_more"
             android:title="@string/pref_more_settings"
-            app:isPreferenceVisible="false">
-            <intent
-                android:targetClass="org.microg.gms.ui.GoogleMoreFragment$AsActivity"
-                android:targetPackage="@string/package_id" />
-        </Preference>
+            app:isPreferenceVisible="false" />
     </PreferenceCategory>
     <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_other_services">
         <Preference

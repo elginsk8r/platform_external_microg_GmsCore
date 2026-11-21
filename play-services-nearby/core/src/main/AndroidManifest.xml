@@ -69,7 +69,7 @@
             android:name="org.microg.gms.nearby.exposurenotification.ui.ExposureNotificationsSettingsActivity"
             android:exported="false"
             android:process=":ui"
-            android:theme="@style/Theme.AppCompat.DayNight">
+            android:theme="@android:style/Theme.NoDisplay">
             <intent-filter android:priority="-100">
                 <action android:name="com.google.android.gms.settings.EXPOSURE_NOTIFICATION_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />

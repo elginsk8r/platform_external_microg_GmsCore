@@ -54,6 +54,10 @@ class SettingsFragment : ResourceSettingsFragment() {
             findNavController().navigate(requireContext(), R.id.openWorkProfileSettings)
             true
         }
+        findPreference<Preference>(PREF_GOOGLE_MORE)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(requireContext(), R.id.openMoreGoogleSettings)
+            true
+        }
 
         findPreference<Preference>(PREF_ABOUT)!!.apply {
             onPreferenceClickListener = Preference.OnPreferenceClickListener {
@@ -139,6 +143,7 @@ class SettingsFragment : ResourceSettingsFragment() {
         const val PREF_VENDING = "pref_vending"
         const val PREF_WORK_PROFILE = "pref_work_profile"
         const val PREF_ACCOUNTS = "pref_accounts"
+        const val PREF_GOOGLE_MORE = "pref_google_more"
     }
 
     init {

@@ -16,15 +16,31 @@
 
 package org.microg.gms.ui;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.preference.PreferenceFragmentCompat;
+
 import com.google.android.gms.R;
 
-import org.microg.tools.ui.AbstractSettingsActivity;
+public class GoogleMoreFragment extends PreferenceFragmentCompat {
+    @Override
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        setPreferencesFromResource(R.xml.preferences_google_more, rootKey);
+    }
 
-public class GoogleMoreFragment {
-    public static class AsActivity extends AbstractSettingsActivity {
-        public AsActivity() {
-            showHomeAsUp = true;
-            preferencesResource = R.xml.preferences_google_more;
+    /**
+     * Opens these settings in microG Settings.
+     */
+    public static class AsActivity extends Activity {
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("x-gms-settings://google-more"), this, MainSettingsActivity.class));
+            finish();
         }
     }
 }
