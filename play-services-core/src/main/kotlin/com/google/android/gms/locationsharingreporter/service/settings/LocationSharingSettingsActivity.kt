@@ -65,14 +65,13 @@ class LocationSharingSettingsActivity : AppCompatActivity() {
         if (accountName.isNullOrEmpty()) {
             Log.w(TAG, "Missing account name")
             finish()
+            return
         }
         val ivAvatar = findViewById<ImageView>(R.id.avatar_iv)
-        if (accountName != null) {
-            lifecycleScope.launchWhenStarted {
-                withContext(Dispatchers.IO) {
-                    PeopleManager.getOwnerAvatarBitmap(this@LocationSharingSettingsActivity, accountName, true)
-                }?.let { ivAvatar.setImageDrawable(getCircleBitmapDrawable(it)) }
-            }
+        lifecycleScope.launchWhenStarted {
+            withContext(Dispatchers.IO) {
+                PeopleManager.getOwnerAvatarBitmap(this@LocationSharingSettingsActivity, accountName, true)
+            }?.let { ivAvatar.setImageDrawable(getCircleBitmapDrawable(it)) }
         }
 
         findViewById<TextView>(R.id.account_email_tv).text = accountName
@@ -82,6 +81,7 @@ class LocationSharingSettingsActivity : AppCompatActivity() {
         if (currentAccount == null) {
             Log.w(TAG, "Missing account")
             finish()
+            return
         }
 
         val locationSharingLayout = findViewById<View>(R.id.location_sharing_layout)
@@ -89,11 +89,11 @@ class LocationSharingSettingsActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             val reportingRequestStore = withContext(Dispatchers.IO) {
-                val readSharesResponse = requestReadShares(this@LocationSharingSettingsActivity, currentAccount!!)
+                val readSharesResponse = requestReadShares(this@LocationSharingSettingsActivity, currentAccount)
                 readSharesResponseDetail(readSharesResponse, this@LocationSharingSettingsActivity, currentAccount)
             }
             Log.d(TAG, "readSharesResponse: $reportingRequestStore")
-            updateUI(reportingRequestStore, currentAccount!!)
+            updateUI(reportingRequestStore, currentAccount)
             locationSharingLayout.visibility = View.VISIBLE
             progressBar.visibility = View.INVISIBLE
         }
