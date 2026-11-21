@@ -342,7 +342,7 @@
             android:name="org.microg.vending.installer.AskInstallReminderActivity"
             android:exported="false"
             android:excludeFromRecents="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar"
             tools:targetApi="21"/>
 
     </application>

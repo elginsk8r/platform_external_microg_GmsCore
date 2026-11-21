@@ -18,13 +18,15 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/app_install_needs_permissions_title"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textAppearance="?attr/textAppearanceHeadlineSmall" />
 
         <ImageView
             android:id="@+id/btn_close"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@android:string/cancel"
+            android:padding="8dp"
             android:src="@drawable/ic_cancel"/>
 
     </LinearLayout>
@@ -34,8 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_install_allow_to_install_third_app"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         android:layout_marginHorizontal="24dp" />
 
     <LinearLayout
@@ -55,9 +56,8 @@
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
             android:layout_marginTop="8dp"
-            android:textStyle="bold" />
+            android:textAppearance="?attr/textAppearanceTitleMedium" />
 
     </LinearLayout>
 
@@ -65,8 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_install_refuse_permission_remind"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textAppearance="?attr/textAppearanceTitleMedium"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="6dp"/>
 
@@ -74,7 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_install_refuse_permission_remind_sub"
-        android:textSize="14sp"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
+        android:textColor="?android:attr/textColorSecondary"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="24dp" />
 
@@ -83,16 +83,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_install_not_remind_again"
-        android:textSize="14sp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="24dp" />
 
     <Button
         android:id="@+id/btn_allow"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:text="@string/app_install_permission_allowed"
-        android:textSize="14sp" />
+        android:text="@string/app_install_permission_allowed" />
 
 </LinearLayout> 

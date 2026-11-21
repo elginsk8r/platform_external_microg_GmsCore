@@ -8,10 +8,10 @@ package org.microg.gms.ui
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import androidx.appcompat.widget.SwitchCompat
 import androidx.core.content.res.TypedArrayUtils
 import androidx.preference.PreferenceViewHolder
 import androidx.preference.TwoStatePreference
+import com.google.android.material.materialswitch.MaterialSwitch
 import org.microg.gms.base.core.R
 
 // TODO
@@ -36,7 +36,7 @@ class SwitchBarPreference : TwoStatePreference {
         super.onBindViewHolder(holder)
         holder.isDividerAllowedBelow = false
         holder.isDividerAllowedAbove = false
-        val switch = holder.findViewById(R.id.switch_widget) as SwitchCompat
+        val switch = holder.findViewById(R.id.switch_widget) as MaterialSwitch
         switch.setOnCheckedChangeListener(null)
         switch.isChecked = isChecked
         switch.setOnCheckedChangeListener { view, isChecked ->

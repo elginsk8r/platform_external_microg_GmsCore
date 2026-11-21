@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="textStart"
         android:gravity="start"
-        style="@style/TextAppearance.AppCompat.Title"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
         tools:text="Allow App to read the message below and enter the code?" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:textAlignment="textStart"
         android:layout_marginTop="10dp"
         android:gravity="start"
-        style="@style/TextAppearance.AppCompat.Small"
+        android:textAppearance="?attr/textAppearanceBodyMedium"
         tools:text="OTP is 123456 to accept transaction with App. Do not share for security reasons" />
 
     <LinearLayout
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="@string/sms_user_consent_deny"
-            style="@style/Widget.AppCompat.Button.Borderless" />
+            style="@style/Widget.Material3.Button.TextButton" />
 
         <Button
             android:id="@android:id/button1"
@@ -51,7 +51,6 @@
             android:layout_width="wrap_content"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            android:text="@string/sms_user_consent_allow"
-            style="@style/Widget.AppCompat.Button.Colored" />
+            android:text="@string/sms_user_consent_allow" />
     </LinearLayout>
 </LinearLayout>

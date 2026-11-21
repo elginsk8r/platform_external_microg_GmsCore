@@ -19,7 +19,6 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
@@ -33,6 +32,7 @@ import com.google.android.gms.locationsharingreporter.service.readSharesResponse
 import com.google.android.gms.locationsharingreporter.service.requestReadShares
 import com.google.android.gms.locationsharingreporter.service.sendLocationSharingEnable
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.materialswitch.MaterialSwitch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -101,7 +101,7 @@ class LocationSharingSettingsActivity : AppCompatActivity() {
 
 
     private fun updateUI(reportingRequestStore: ReportingRequestStore, account: Account) {
-        val switchShare = findViewById<SwitchCompat>(R.id.location_share_switch)
+        val switchShare = findViewById<MaterialSwitch>(R.id.location_share_switch)
         val locationShareListEmpty = reportingRequestStore.accountLocationSharingMap.isEmpty()
         val locationSharingEnabled = ReportingRequestStoreFile.isLocationSharingEnabled(this, account.name)
         switchShare.isChecked = !locationShareListEmpty && locationSharingEnabled
@@ -156,7 +156,7 @@ class LocationSharingSettingsActivity : AppCompatActivity() {
     }
 
 
-    private fun showDialog(switchShare: SwitchCompat, account: Account) {
+    private fun showDialog(switchShare: MaterialSwitch, account: Account) {
         MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.location_sharing_turn_off_title)
                 .setMessage(R.string.location_sharing_turn_off_hint)
