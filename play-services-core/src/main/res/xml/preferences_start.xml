@@ -16,7 +16,75 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_header">
+    <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_header" />
+    <PreferenceCategory
+        android:key="prefcat_google_apps"
+        android:title="@string/prefcat_google_apps">
+        <Preference
+            android:icon="@drawable/ic_manage_accounts"
+            android:key="pref_accounts"
+            android:summary="@string/pref_accounts_summary"
+            android:title="@string/pref_accounts_title" />
+        <Preference
+            android:icon="@drawable/ic_cloud_bell"
+            android:key="pref_gcm"
+            android:title="@string/service_name_mcs" />
+        <Preference
+            android:icon="@drawable/ic_device_login"
+            android:key="pref_checkin"
+            android:title="@string/service_name_checkin" />
+        <Preference
+            android:icon="@drawable/ic_videogame"
+            android:key="pref_games"
+            android:title="@string/games_title" />
+        <Preference
+            android:icon="@drawable/ic_shop"
+            android:key="pref_vending"
+            android:title="@string/service_name_vending" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="prefcat_privacy_security"
+        android:title="@string/prefcat_privacy_security">
+        <Preference
+            android:icon="@drawable/ic_certificate"
+            android:key="pref_snet"
+            android:title="@string/service_name_device_attestation" />
+        <Preference
+            android:icon="@drawable/ic_map_marker"
+            android:key="pref_location"
+            android:title="@string/service_name_location"/>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="prefcat_autofill_passwords"
+        android:title="@string/prefcat_autofill_passwords">
+        <Preference
+            android:icon="@drawable/ic_passkey"
+            android:key="pref_passkeys"
+            android:title="@string/pref_passkey_manager_title" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="prefcat_personal_device_safety"
+        android:title="@string/prefcat_personal_device_safety" />
+    <PreferenceCategory
+        android:key="prefcat_device_policy"
+        android:title="@string/prefcat_device_policy">
+        <Preference
+            android:icon="@drawable/ic_work"
+            android:key="pref_work_profile"
+            android:title="@string/service_name_work_profile" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="prefcat_other_services"
+        android:title="@string/prefcat_other">
+        <Preference
+            android:icon="@drawable/dots_horizontal"
+            android:key="pref_google_more"
+            android:title="@string/pref_more_settings"
+            app:isPreferenceVisible="false" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="prefcat_footer"
+        android:title="@string/gms_app_name">
         <Preference
             android:icon="@drawable/ic_check_list"
             android:summary="@string/self_check_desc"
@@ -25,46 +93,6 @@
                 android:targetClass="org.microg.gms.ui.SelfCheckFragment$AsActivity"
                 android:targetPackage="@string/package_id" />
         </Preference>
-    </PreferenceCategory>
-    <PreferenceCategory android:title="@string/prefcat_google_services" android:key="prefcat_google_services">
-        <Preference
-            android:icon="@drawable/ic_manage_accounts"
-            android:key="pref_accounts"
-            android:summary="@string/pref_accounts_summary"
-            android:title="@string/pref_accounts_title" />
-        <Preference
-            android:icon="@drawable/ic_device_login"
-            android:key="pref_checkin"
-            android:title="@string/service_name_checkin" />
-        <Preference
-            android:icon="@drawable/ic_cloud_bell"
-            android:key="pref_gcm"
-            android:title="@string/service_name_mcs" />
-        <Preference
-            android:icon="@drawable/ic_certificate"
-            android:key="pref_snet"
-            android:title="@string/service_name_device_attestation" />
-        <Preference
-            android:icon="@drawable/ic_shop"
-            android:key="pref_vending"
-            android:title="@string/service_name_vending" />
-        <Preference
-            android:icon="@drawable/ic_work"
-            android:key="pref_work_profile"
-            android:title="@string/service_name_work_profile" />
-        <Preference
-            android:icon="@drawable/dots_horizontal"
-            android:key="pref_google_more"
-            android:title="@string/pref_more_settings"
-            app:isPreferenceVisible="false" />
-    </PreferenceCategory>
-    <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_other_services">
-        <Preference
-            android:icon="@drawable/ic_map_marker"
-            android:key="pref_location"
-            android:title="@string/service_name_location"/>
-    </PreferenceCategory>
-    <PreferenceCategory android:layout="@layout/preference_category_no_label" android:key="prefcat_footer">
         <Preference
             android:icon="@drawable/ic_info_outline"
             android:key="pref_about"

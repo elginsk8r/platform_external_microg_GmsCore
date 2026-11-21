@@ -17,4 +17,6 @@
 
 <resources>
     <bool name="is_gmscore">true</bool>
+    <!-- Show icons for service entries on the main settings screen -->
+    <bool name="config_settings_show_icons">false</bool>
 </resources>

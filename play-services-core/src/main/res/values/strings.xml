@@ -151,6 +151,12 @@ Please set up a password, PIN, or pattern lock screen."</string>
     <string name="prefcat_location_service">Location service</string>
     <string name="prefcat_services">Services</string>
     <string name="prefcat_test">Test</string>
+    <string name="prefcat_personal_device_safety">Personal &amp; device safety</string>
+    <string name="prefcat_privacy_security">Privacy &amp; security</string>
+    <string name="prefcat_device_policy">Device policy</string>
+    <string name="prefcat_google_apps">Settings for Google apps</string>
+    <string name="prefcat_autofill_passwords">Autofill &amp; passwords</string>
+    <string name="prefcat_other">Other</string>
 
     <string name="cond_gcm_bat_title">Battery optimizations enabled</string>
     <string name="cond_gcm_bat_summary">You enabled Cloud Messaging but have battery optimizations active for microG Services. For push notifications to arrive you should ignore battery optimizations.</string>
@@ -195,6 +201,7 @@ Please set up a password, PIN, or pattern lock screen."</string>
     <string name="pref_add_account_title">Account</string>
     <string name="pref_add_account_summary">Add Google account</string>
 
+    <string name="pref_requires_checkin_summary">Requires device registration</string>
     <string name="pref_gcm_enable_mcs_summary">Cloud Messaging is a push notification provider used by many third-party applications. To use it you must enable device registration.</string>
     <string name="pref_gcm_heartbeat_title">Cloud Messaging heartbeat interval</string>
     <string name="pref_gcm_heartbeat_summary">The interval in seconds for the system to heartbeat the Google servers. Increasing this number will reduce battery consumption, but might cause delays on push messages.\nDeprecated, will be replaced in future release.</string>

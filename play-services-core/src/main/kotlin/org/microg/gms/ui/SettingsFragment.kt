@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import com.google.android.gms.R
+import java.text.Collator
 import org.microg.gms.checkin.CheckinPreferences
 import org.microg.gms.gcm.GcmDatabase
 import org.microg.gms.gcm.GcmPrefs
@@ -54,8 +55,16 @@ class SettingsFragment : ResourceSettingsFragment() {
             findNavController().navigate(requireContext(), R.id.openWorkProfileSettings)
             true
         }
+        findPreference<Preference>(PREF_GAMES)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(requireContext(), R.id.gameManagerFragment)
+            true
+        }
         findPreference<Preference>(PREF_GOOGLE_MORE)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
             findNavController().navigate(requireContext(), R.id.openMoreGoogleSettings)
+            true
+        }
+        findPreference<Preference>(PREF_PASSKEYS)!!.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(requireContext(), R.id.passkeyManagerFragment)
             true
         }
 
@@ -70,16 +79,56 @@ class SettingsFragment : ResourceSettingsFragment() {
         for (entry in getAllSettingsProviders(requireContext()).flatMap { it.getEntriesStatic(requireContext()) }) {
             entry.createPreference()
         }
+        if (!showIcons) {
+            for (category in (SERVICE_CATEGORIES + PREFCAT_FOOTER).mapNotNull { findPreference<PreferenceCategory>(it) }) {
+                category.isIconSpaceReserved = false
+                for (i in 0 until category.preferenceCount) category.getPreference(i).hideIcon()
+            }
+        }
+        sortServiceCategories()
+        updateCategoryVisibility()
+    }
+
+    private val showIcons: Boolean
+        get() = resources.getBoolean(R.bool.config_settings_show_icons)
+
+    private fun Preference.hideIcon() {
+        // Reading icon loads it from its resource id first, so clearing it is not a no-op
+        if (icon != null) icon = null
+        isIconSpaceReserved = false
+    }
+
+    /**
+     * Sorts entries of service categories by their title, like the Google services settings.
+     */
+    private fun sortServiceCategories() {
+        val collator = Collator.getInstance()
+        for (category in SERVICE_CATEGORIES.mapNotNull { findPreference<PreferenceCategory>(it) }) {
+            category.isOrderingAsAdded = false
+            (0 until category.preferenceCount).map { category.getPreference(it) }
+                .sortedWith { a, b -> collator.compare(a.title?.toString().orEmpty(), b.title?.toString().orEmpty()) }
+                .forEachIndexed { index, preference -> preference.order = index }
+        }
+    }
+
+    private fun updateCategoryVisibility() {
+        for (category in (SERVICE_CATEGORIES + PREFCAT_HEADER).mapNotNull { findPreference<PreferenceCategory>(it) }) {
+            category.isVisible = (0 until category.preferenceCount).any { category.getPreference(it).isVisible }
+        }
     }
 
     private fun SettingsProvider.Companion.Entry.createPreference(): Preference? {
         val preference = Preference(requireContext()).fillFromEntry(this)
         try {
             if (findPreference<PreferenceCategory>(when (group) {
-                    SettingsProvider.Companion.Group.HEADER -> "prefcat_header"
-                    SettingsProvider.Companion.Group.GOOGLE -> "prefcat_google_services"
+                    SettingsProvider.Companion.Group.HEADER -> PREFCAT_HEADER
+                    SettingsProvider.Companion.Group.GOOGLE -> "prefcat_google_apps"
                     SettingsProvider.Companion.Group.OTHER -> "prefcat_other_services"
-                    SettingsProvider.Companion.Group.FOOTER -> "prefcat_footer"
+                    SettingsProvider.Companion.Group.FOOTER -> PREFCAT_FOOTER
+                    SettingsProvider.Companion.Group.PERSONAL_DEVICE_SAFETY -> "prefcat_personal_device_safety"
+                    SettingsProvider.Companion.Group.PRIVACY_SECURITY -> "prefcat_privacy_security"
+                    SettingsProvider.Companion.Group.DEVICE_POLICY -> "prefcat_device_policy"
+                    SettingsProvider.Companion.Group.GOOGLE_APPS -> "prefcat_google_apps"
                 })?.addPreference(preference) == true) {
                 createdPreferences.add(preference)
                 return preference
@@ -97,6 +146,7 @@ class SettingsFragment : ResourceSettingsFragment() {
         title = entry.title
         summary = entry.summary
         icon = entry.icon
+        if (!showIcons && entry.group != SettingsProvider.Companion.Group.HEADER) hideIcon()
         isPersistent = false
         isVisible = true
         setOnPreferenceClickListener {
@@ -121,6 +171,13 @@ class SettingsFragment : ResourceSettingsFragment() {
         findPreference<Preference>(PREF_CHECKIN)!!.setSummary(if (CheckinPreferences.isEnabled(requireContext())) org.microg.gms.base.core.R.string.service_status_enabled_short else org.microg.gms.base.core.R.string.service_status_disabled_short)
         findPreference<Preference>(PREF_SNET)!!.setSummary(if (SafetyNetPreferences.isEnabled(requireContext())) org.microg.gms.base.core.R.string.service_status_enabled_short else org.microg.gms.base.core.R.string.service_status_disabled_short)
 
+        // Cloud messaging and device attestation depend on device registration
+        val checkinEnabled = CheckinPreferences.isEnabled(context)
+        for (preference in listOf(PREF_GCM, PREF_SNET).mapNotNull { findPreference<Preference>(it) }) {
+            preference.isEnabled = checkinEnabled
+            if (!checkinEnabled) preference.setSummary(R.string.pref_requires_checkin_summary)
+        }
+
         lifecycleScope.launchWhenResumed {
             val entries = getAllSettingsProviders(requireContext()).flatMap { it.getEntriesDynamic(requireContext()) }
             for (preference in createdPreferences) {
@@ -131,6 +188,8 @@ class SettingsFragment : ResourceSettingsFragment() {
                 if (preference != null) preference.fillFromEntry(entry)
                 else entry.createPreference()
             }
+            sortServiceCategories()
+            updateCategoryVisibility()
         }
     }
 
@@ -143,7 +202,20 @@ class SettingsFragment : ResourceSettingsFragment() {
         const val PREF_VENDING = "pref_vending"
         const val PREF_WORK_PROFILE = "pref_work_profile"
         const val PREF_ACCOUNTS = "pref_accounts"
+        const val PREF_GAMES = "pref_games"
+        const val PREF_PASSKEYS = "pref_passkeys"
         const val PREF_GOOGLE_MORE = "pref_google_more"
+
+        private const val PREFCAT_HEADER = "prefcat_header"
+        private const val PREFCAT_FOOTER = "prefcat_footer"
+        private val SERVICE_CATEGORIES = listOf(
+            "prefcat_google_apps",
+            "prefcat_privacy_security",
+            "prefcat_autofill_passwords",
+            "prefcat_personal_device_safety",
+            "prefcat_device_policy",
+            "prefcat_other_services"
+        )
     }
 
     init {

@@ -18,7 +18,7 @@ import org.microg.gms.nearby.core.R
 import org.microg.gms.nearby.exposurenotification.ExposureDatabase
 import org.microg.gms.nearby.exposurenotification.ExposurePreferences
 import org.microg.gms.ui.settings.SettingsProvider.Companion.Entry
-import org.microg.gms.ui.settings.SettingsProvider.Companion.Group.OTHER
+import org.microg.gms.ui.settings.SettingsProvider.Companion.Group.PERSONAL_DEVICE_SAFETY
 
 @Keep
 object ExposureNotificationsSettingsProvider : SettingsProvider {
@@ -41,7 +41,7 @@ object ExposureNotificationsSettingsProvider : SettingsProvider {
     private fun getEntries(context: Context) = listOf(
         Entry(
             key = "pref_exposure",
-            group = OTHER,
+            group = PERSONAL_DEVICE_SAFETY,
             navigationId = R.id.exposureNotificationsFragment,
             title = context.getString(R.string.service_name_exposure),
             summary = if (ExposurePreferences(context).enabled) {

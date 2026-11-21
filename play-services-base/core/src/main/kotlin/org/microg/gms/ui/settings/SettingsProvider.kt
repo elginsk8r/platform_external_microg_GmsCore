@@ -28,7 +28,11 @@ interface SettingsProvider {
             HEADER,
             GOOGLE,
             OTHER,
-            FOOTER
+            FOOTER,
+            PERSONAL_DEVICE_SAFETY,
+            PRIVACY_SECURITY,
+            DEVICE_POLICY,
+            GOOGLE_APPS
         }
 
         data class Entry(
