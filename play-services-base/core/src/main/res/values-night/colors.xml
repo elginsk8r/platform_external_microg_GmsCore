@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ SPDX-FileCopyrightText: 2026 microG Project Team
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+
+<resources>
+    <!-- Warning card, matching SettingsLib banner message attention levels -->
+    <color name="warning_card_background_medium">#333121</color>
+    <color name="warning_card_accent_medium">#FDD663</color>
+    <color name="warning_card_background_high">#3B2D2C</color>
+    <color name="warning_card_accent_high">#F28B82</color>
+</resources>

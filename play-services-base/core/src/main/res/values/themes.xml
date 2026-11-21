@@ -86,6 +86,15 @@
         <attr format="reference" name="switchBarFrameBackgroundDisabled" />
     </declare-styleable>
 
+    <!-- Warning card -->
+
+    <declare-styleable name="WarningCardPreference">
+        <attr format="enum" name="attentionLevel">
+            <enum name="medium" value="1" />
+            <enum name="high" value="0" />
+        </attr>
+    </declare-styleable>
+
     <style name="Preference.SwitchBar">
         <item name="layout">@layout/preference_switch_bar</item>
         <item name="switchBarFrameBackgroundOn">?attr/colorControlActivated</item>
