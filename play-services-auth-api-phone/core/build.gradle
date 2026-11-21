@@ -11,6 +11,8 @@ dependencies {
     implementation project(':play-services-base-core')
 
     implementation "androidx.appcompat:appcompat:$appcompatVersion"
+
+    implementation "com.google.android.material:material:$materialVersion"
 }
 
 android {
