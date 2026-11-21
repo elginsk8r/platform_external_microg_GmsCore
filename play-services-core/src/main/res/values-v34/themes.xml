@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ SPDX-FileCopyrightText: 2026 microG Project Team
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+
+<resources>
+    <!-- Preference theme -->
+    <style name="Theme.Base.PreferenceThemeOverlay" parent="@style/PreferenceThemeOverlay">
+        <item name="switchPreferenceCompatStyle">@style/Theme.Base.Preference.SwitchPreferenceCompat</item>
+        <item name="switchBarPreferenceStyle">@style/Theme.Base.Preference.SwitchBarPreference</item>
+        <item name="preferenceCategoryTitleTextAppearance">?attr/textAppearanceTitleSmall</item>
+        <item name="preferenceCategoryTitleTextColor">?attr/colorPrimary</item>
+        <item name="preferenceFragmentCompatStyle">@style/Theme.Base.PreferenceFragment</item>
+    </style>
+
+    <style name="Theme.Base.PreferenceFragment" parent="@style/PreferenceFragment.Material">
+        <item name="android:divider">@null</item>
+    </style>
+</resources>

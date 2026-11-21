@@ -2,11 +2,17 @@ package org.microg.gms.ui;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -58,6 +64,10 @@ public class MainSettingsActivity extends AppCompatActivity {
 
         setContentView(R.layout.settings_root_activity);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            enableEdgeToEdge();
+        }
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         CollapsingToolbarLayout toolbarLayout = findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
@@ -77,6 +87,22 @@ public class MainSettingsActivity extends AppCompatActivity {
         appBarConfiguration = new AppBarConfiguration.Builder(getNavController().getGraph()).build();
         NavigationUI.setupWithNavController(toolbarLayout, toolbar, getNavController(), appBarConfiguration);
         showDialogIfNeeded();
+    }
+
+    private void enableEdgeToEdge() {
+        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
+        View navHost = findViewById(R.id.navhost);
+        // Handle insets at the content root: with legacy inset dispatch, the collapsing toolbar would consume them
+        // before they reach the scrolling content.
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(android.R.id.content), (view, windowInsets) -> {
+            int types = WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout();
+            Insets insets = windowInsets.getInsets(types);
+            view.setPadding(insets.left, 0, insets.right, 0);
+            navHost.setPadding(navHost.getPaddingLeft(), navHost.getPaddingTop(), navHost.getPaddingRight(), insets.bottom);
+            return new WindowInsetsCompat.Builder(windowInsets)
+                    .setInsets(types, Insets.of(0, insets.top, 0, 0))
+                    .build();
+        });
     }
 
     @Override
