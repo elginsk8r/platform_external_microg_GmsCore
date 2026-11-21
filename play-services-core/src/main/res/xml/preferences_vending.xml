@@ -9,21 +9,15 @@
     <PreferenceCategory
         android:title="@string/pref_vending_licensing_category"
         app:iconSpaceReserved="false">
-        <org.microg.gms.ui.TextPreference
-            android:selectable="false"
-            android:summary="@string/pref_vending_license_enable_summary"
-            app:iconSpaceReserved="false" />
         <SwitchPreferenceCompat
             android:title="@string/pref_vending_licensing_enable_switch"
+            android:summary="@string/pref_vending_license_enable_summary"
             android:key="vending_licensing"
             android:persistent="false"
             app:iconSpaceReserved="false" />
-        <org.microg.gms.ui.TextPreference
-            android:selectable="false"
-            android:summary="@string/pref_vending_licensing_purchase_free_apps_summary"
-            app:iconSpaceReserved="false" />
         <SwitchPreferenceCompat
             android:title="@string/pref_vending_licensing_purchase_free_apps_switch"
+            android:summary="@string/pref_vending_licensing_purchase_free_apps_summary"
             android:key="vending_licensing_purchase_free_apps"
             android:persistent="false"
             android:dependency="vending_licensing"
@@ -33,23 +27,13 @@
     <PreferenceCategory
         android:title="@string/pref_vending_billing_category"
         app:iconSpaceReserved="false">
-        <org.microg.gms.ui.TextPreference
-            android:selectable="false"
-            android:summary="@string/pref_vending_billing_enable_summary"
-            app:iconSpaceReserved="false" />
-        <org.microg.gms.ui.TextPreference
-            android:icon="@drawable/ic_circle_warn"
-            android:selectable="false"
-            android:summary="@string/pref_vending_billing_note_experimental" />
         <SwitchPreferenceCompat
             android:title="@string/pref_vending_billing_enable_switch"
             android:key="vending_iap"
             android:persistent="false"
             app:iconSpaceReserved="false" />
-        <org.microg.gms.ui.TextPreference
-            android:selectable="false"
-            android:summary="@string/pref_vending_billing_note_licensing"
-            app:iconSpaceReserved="false" />
+        <org.microg.gms.ui.WarningCardPreference
+            android:summary="@string/pref_vending_billing_note_experimental" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -78,6 +62,13 @@
             android:summary="@string/pref_vending_asset_device_sync_summary"
             android:key="vending_device_sync"
             android:persistent="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:layout="@layout/preference_category_no_label">
+        <Preference
+            android:key="pref_vending_install_settings"
+            android:title="@string/pref_app_install_settings_title"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

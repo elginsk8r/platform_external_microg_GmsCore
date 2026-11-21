@@ -11,12 +11,6 @@
         android:key="game_allow_create_player"
         android:persistent="false" />
 
-    <org.microg.gms.ui.TextPreference
-        android:key="pref_game_allow_create_player_summary"
-        android:selectable="false"
-        app:iconSpaceReserved="false"
-        android:summary="@string/pref_auto_create_player_intro" />
-
     <PreferenceCategory
         android:title="@string/prefcat_accounts_settings_title"
         app:iconSpaceReserved="false">
@@ -38,6 +32,11 @@
             android:title="@string/pref_delete_game_account_data"
             app:isPreferenceVisible="false"
             app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+    <PreferenceCategory android:layout="@layout/preference_category_no_label">
+        <org.microg.gms.ui.FooterPreference
+            android:key="pref_game_allow_create_player_summary"
+            android:title="@string/pref_auto_create_player_intro" />
     </PreferenceCategory>
 
 </PreferenceScreen>

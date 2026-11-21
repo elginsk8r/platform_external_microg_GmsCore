@@ -7,9 +7,6 @@ package org.microg.gms.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
@@ -28,6 +25,12 @@ class VendingFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.preferences_vending)
+        findPreference<Preference>(PREF_IAP_ENABLED)?.summary =
+            "${getText(R.string.pref_vending_billing_enable_summary)}\n${getText(R.string.pref_vending_billing_note_licensing)}"
+        findPreference<Preference>(PREF_INSTALL_SETTINGS)?.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+            findNavController().navigate(requireContext(), R.id.openVendingInstallSettings)
+            true
+        }
     }
 
     @SuppressLint("RestrictedApi")
@@ -122,32 +125,13 @@ class VendingFragment : PreferenceFragmentCompat() {
         }
     }
 
-    init {
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.add(0, MENU_INSTALL_MANAGED, 0, R.string.pref_app_install_settings_title)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            MENU_INSTALL_MANAGED -> {
-                findNavController().navigate(requireContext(), R.id.openVendingInstallSettings)
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
     companion object {
-        private const val MENU_INSTALL_MANAGED = Menu.FIRST
         const val PREF_LICENSING_ENABLED = "vending_licensing"
         const val PREF_LICENSING_PURCHASE_FREE_APPS_ENABLED = "vending_licensing_purchase_free_apps"
         const val PREF_SPLIT_INSTALL_ENABLED = "vending_split_install"
         const val PREF_IAP_ENABLED = "vending_iap"
         const val PREF_ASSET_DELIVERY_ENABLED = "vending_asset_delivery"
         const val PREF_DEVICE_SYNC_ENABLED = "vending_device_sync"
+        const val PREF_INSTALL_SETTINGS = "pref_vending_install_settings"
     }
 }
