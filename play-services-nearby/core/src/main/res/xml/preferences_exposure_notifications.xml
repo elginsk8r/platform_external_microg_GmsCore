@@ -13,50 +13,44 @@
         android:key="pref_exposure_enabled"
         android:persistent="false" />
 
-    <Preference
-        android:key="pref_exposure_enable_info"
-        android:selectable="false"
-        android:summary="@string/pref_exposure_enable_info_summary"
-        app:isPreferenceVisible="false"
-        tools:isPreferenceVisible="true" />
-
-    <Preference
+    <org.microg.gms.ui.WarningCardPreference
         android:icon="@drawable/ic_bluetooth_off"
         android:key="pref_exposure_error_bluetooth_off"
+        android:selectable="true"
         android:title="@string/pref_exposure_error_bluetooth_off_title"
         android:summary="@string/exposure_confirm_bluetooth_description"
         app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true" />
 
-    <Preference
+    <org.microg.gms.ui.WarningCardPreference
         android:icon="@drawable/ic_location_off"
         android:key="pref_exposure_error_location_off"
+        android:selectable="true"
         android:title="@string/pref_exposure_error_location_off_title"
         android:summary="@string/exposure_confirm_location_description"
         app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true" />
 
-    <Preference
+    <org.microg.gms.ui.WarningCardPreference
         android:icon="@drawable/ic_info_outline"
         android:key="pref_exposure_error_nearby_not_granted"
+        android:selectable="true"
         android:title="@string/pref_exposure_error_nearby_not_granted_title"
         android:summary="@string/pref_exposure_error_nearby_not_granted_description"
         app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true" />
 
-    <Preference
-        android:icon="@drawable/ic_alert"
+    <org.microg.gms.ui.WarningCardPreference
         android:key="pref_exposure_error_bluetooth_unsupported"
-        android:selectable="false"
         android:summary="@string/pref_exposure_error_bluetooth_unsupported_summary"
+        app:attentionLevel="high"
         app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true" />
 
-    <Preference
-        android:icon="@drawable/ic_alert"
+    <org.microg.gms.ui.WarningCardPreference
         android:key="pref_exposure_error_bluetooth_no_advertise"
-        android:selectable="false"
         android:summary="@string/pref_exposure_error_bluetooth_no_advertise_summary"
+        app:attentionLevel="high"
         app:isPreferenceVisible="false"
         tools:isPreferenceVisible="true" />
 
@@ -82,9 +76,8 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:layout="@layout/preference_category_no_label">
-        <org.microg.gms.ui.TextPreference
-            android:icon="@drawable/ic_info_outline"
-            android:selectable="false"
-            android:summary="@string/pref_exposure_info_summary" />
+        <org.microg.gms.ui.FooterPreference
+            android:key="pref_exposure_info"
+            android:title="@string/pref_exposure_info_summary" />
     </PreferenceCategory>
 </PreferenceScreen>

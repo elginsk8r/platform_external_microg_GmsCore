@@ -33,7 +33,7 @@ import org.microg.gms.ui.navigate
 
 class ExposureNotificationsFragment : PreferenceFragmentCompat() {
     private lateinit var switchBarPreference: SwitchBarPreference
-    private lateinit var exposureEnableInfo: Preference
+    private lateinit var exposureInfo: Preference
     private lateinit var exposureBluetoothOff: Preference
     private lateinit var exposureLocationOff: Preference
     private lateinit var exposureNearbyNotGranted: Preference
@@ -56,7 +56,7 @@ class ExposureNotificationsFragment : PreferenceFragmentCompat() {
     @SuppressLint("RestrictedApi")
     override fun onBindPreferences() {
         switchBarPreference = preferenceScreen.findPreference("pref_exposure_enabled") ?: switchBarPreference
-        exposureEnableInfo = preferenceScreen.findPreference("pref_exposure_enable_info") ?: exposureEnableInfo
+        exposureInfo = preferenceScreen.findPreference("pref_exposure_info") ?: exposureInfo
         exposureBluetoothOff = preferenceScreen.findPreference("pref_exposure_error_bluetooth_off") ?: exposureBluetoothOff
         exposureLocationOff = preferenceScreen.findPreference("pref_exposure_error_location_off") ?: exposureLocationOff
         exposureNearbyNotGranted = preferenceScreen.findPreference("pref_exposure_error_nearby_not_granted") ?: exposureNearbyNotGranted
@@ -137,7 +137,12 @@ class ExposureNotificationsFragment : PreferenceFragmentCompat() {
         lifecycleScope.launchWhenResumed {
             handler.postDelayed(updateStatusRunnable, UPDATE_STATUS_INTERVAL)
             val enabled = getExposureNotificationsServiceInfo(appContext).configuration.enabled
-            exposureEnableInfo.isVisible = !enabled
+            // Explain how to enable in the footer while disabled
+            exposureInfo.title = if (enabled) {
+                getString(R.string.pref_exposure_info_summary)
+            } else {
+                getString(R.string.pref_exposure_info_summary) + "\n\n" + getString(R.string.pref_exposure_enable_info_summary)
+            }
 
             val bluetoothSupported = ScannerService.isSupported(appContext)
             val advertisingSupported = if (bluetoothSupported == true) AdvertiserService.isSupported(appContext) else bluetoothSupported
