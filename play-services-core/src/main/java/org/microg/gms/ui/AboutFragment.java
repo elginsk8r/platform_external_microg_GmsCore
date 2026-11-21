@@ -16,48 +16,34 @@
 
 package org.microg.gms.ui;
 
-import androidx.fragment.app.Fragment;
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.google.android.gms.BuildConfig;
+import com.google.android.gms.R;
 
-import org.microg.tools.ui.AbstractAboutFragment;
-import org.microg.tools.ui.AbstractSettingsActivity;
+public class AboutFragment extends PreferenceFragmentCompat {
+    private static final String PREF_HEADER = "pref_about_header";
+    private static final String PREF_VERSION = "pref_about_version";
+    private static final String PREF_LICENSES = "pref_about_licenses";
 
-import java.util.List;
-
-public class AboutFragment extends AbstractAboutFragment {
-
-    @Override
-    protected void collectLibraries(List<AbstractAboutFragment.Library> libraries) {
-        if ("vtm".equalsIgnoreCase(BuildConfig.FLAVOR_maps)) {
-            libraries.add(new AbstractAboutFragment.Library("org.oscim.android", "V™", "GNU LGPLv3, Hannes Janetzek and devemux86"));
-            libraries.add(new AbstractAboutFragment.Library("org.slf4j", "SLF4J", "MIT License, QOS.ch"));
-        } else if ("mapbox".equalsIgnoreCase(BuildConfig.FLAVOR_maps) || "maplibre".equalsIgnoreCase(BuildConfig.FLAVOR_maps)){
-            libraries.add(new AbstractAboutFragment.Library("com.mapbox.mapboxsdk", "MapLibre Native for Android", "Two-Clause BSD, MapLibre contributors"));
-        } else if ("hms".equalsIgnoreCase(BuildConfig.FLAVOR_maps)) {
-            libraries.add(new AbstractAboutFragment.Library("com.huawei.hms.maps.api", "Huawei MapKit", "Proprietary, Huawei Technologies"));
-        }
-        libraries.add(new AbstractAboutFragment.Library("androidx", "Android Jetpack", "Apache License 2.0, The Android Open Source Project"));
-        libraries.add(new AbstractAboutFragment.Library("com.upokecenter.cbor", "CBOR", "Creative Commons Zero, Peter O"));
-        libraries.add(new AbstractAboutFragment.Library("de.hdodenhof.circleimageview", "CircleImageView", "Apache License 2.0, Henning Dodenhof"));
-        libraries.add(new AbstractAboutFragment.Library("su.litvak.chromecast.api.v2", "ChromeCast Java API v2", "Apache License 2.0, Vitaly Litvak"));
-        libraries.add(new AbstractAboutFragment.Library("org.conscrypt", "Conscrypt", "Apache License 2.0, The Android Open Source Project"));
-        libraries.add(new AbstractAboutFragment.Library("org.chromium.net", "Cronet", "BSD-style License, The Chromium Authors"));
-        libraries.add(new AbstractAboutFragment.Library("org.jetbrains.kotlin", "Kotlin", "Apache License 2.0, JetBrains s.r.o."));
-        libraries.add(new AbstractAboutFragment.Library("com.google.android.material", "Material Components", "Apache License 2.0, The Android Open Source Project"));
-        libraries.add(new AbstractAboutFragment.Library("com.android.volley", "Volley", "Apache License 2.0, The Android Open Source Project"));
-        libraries.add(new AbstractAboutFragment.Library("com.squareup.wire", "Wire Protocol Buffers", "Apache License 2.0, Square Inc."));
-        libraries.add(new AbstractAboutFragment.Library("com.google.zxing", "ZXing", "Apache License 2.0, ZXing authors"));
+    public static String getSelfVersion() {
+        return BuildConfig.VERSION_NAME;
     }
 
-    public static class AsActivity extends AbstractSettingsActivity {
-        public AsActivity() {
-            showHomeAsUp = true;
-        }
-
-        @Override
-        protected Fragment getFragment() {
-            return new AboutFragment();
-        }
+    @Override
+    public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
+        addPreferencesFromResource(R.xml.preferences_about);
+        AppHeadingPreference header = findPreference(PREF_HEADER);
+        header.setLayoutResource(R.layout.preference_about_header);
+        header.setPackageName(requireContext().getPackageName());
+        findPreference(PREF_VERSION).setSummary(getSelfVersion());
+        findPreference(PREF_LICENSES).setOnPreferenceClickListener(preference -> {
+            UtilsKt.navigate(NavHostFragment.findNavController(this), requireContext(), R.id.openLicenses, null);
+            return true;
+        });
     }
 }

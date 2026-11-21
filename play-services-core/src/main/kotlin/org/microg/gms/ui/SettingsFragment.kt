@@ -81,7 +81,7 @@ class SettingsFragment : ResourceSettingsFragment() {
                 findNavController().navigate(requireContext(), R.id.openAbout)
                 true
             }
-            summary = getString(org.microg.tools.ui.R.string.about_version_str, AboutFragment.getSelfVersion(context))
+            summary = getString(org.microg.tools.ui.R.string.about_version_str, AboutFragment.getSelfVersion())
         }
 
         for (entry in getAllSettingsProviders(requireContext()).flatMap { it.getEntriesStatic(requireContext()) }) {

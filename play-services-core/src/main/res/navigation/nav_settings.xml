@@ -212,8 +212,15 @@
     <fragment
         android:id="@+id/aboutFragment"
         android:name="org.microg.gms.ui.AboutFragment"
-        android:label="@string/prefcat_about"
-        tools:layout="@layout/about_root" />
+        android:label="@string/prefcat_about">
+        <action
+            android:id="@+id/openLicenses"
+            app:destination="@id/openSourceLicensesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/openSourceLicensesFragment"
+        android:name="org.microg.gms.ui.OpenSourceLicensesFragment"
+        android:label="@string/oss_license_title" />
 
     <!-- Included -->
 

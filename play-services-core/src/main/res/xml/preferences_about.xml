@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ SPDX-FileCopyrightText: 2026 microG Project Team
+  ~ SPDX-License-Identifier: Apache-2.0
+  -->
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <org.microg.gms.ui.AppHeadingPreference
+        android:key="pref_about_header"
+        app:allowDividerBelow="false" />
+
+    <Preference
+        android:key="pref_about_version"
+        android:title="@string/pref_about_version_title"
+        app:enableCopying="true"
+        app:iconSpaceReserved="false" />
+
+    <Preference
+        android:key="pref_about_licenses"
+        android:summary="@string/preferences_license_summary"
+        android:title="@string/oss_license_title"
+        app:iconSpaceReserved="false" />
+</PreferenceScreen>
