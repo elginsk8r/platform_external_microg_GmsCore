@@ -196,6 +196,7 @@ Please set up a password, PIN, or pattern lock screen."</string>
     <string name="pref_accounts_title">Google Accounts</string>
     <string name="pref_game_accounts_title">Google Game Accounts</string>
     <string name="pref_accounts_summary">Add and manage Google accounts</string>
+    <string name="pref_google_account_title">Google Account</string>
     <string name="self_check_card_ok_title">microG is set up</string>
     <string name="self_check_card_ok_summary">Basic checks passed. Self-Check also lists optional permissions.</string>
     <string name="self_check_card_warn_title">Finish setting up microG</string>

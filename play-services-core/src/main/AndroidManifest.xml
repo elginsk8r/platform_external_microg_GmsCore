@@ -914,6 +914,41 @@
             android:taskAffinity="org.microg.gms.settings">
         </activity-alias>
 
+        <!-- microG Settings activity-alias for Settings app homepage -->
+        <activity-alias
+            android:name="com.google.android.gms.app.settings.GoogleSettingsIALink"
+            android:enabled="@bool/ia_settings_enabled"
+            android:exported="true"
+            android:icon="@drawable/ic_app_settings_system"
+            android:label="@string/gms_settings_name"
+            android:process=":ui"
+            android:targetActivity="org.microg.gms.ui.MainSettingsActivity"
+            android:taskAffinity="org.microg.gms.settings">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.homepage" />
+            <meta-data
+                android:name="com.android.settings.group_key"
+                android:value="top_level_account_category" />
+            <meta-data
+                android:name="com.android.settings.keyhint"
+                android:value="top_level_google" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@drawable/ic_app_settings_system" />
+            <meta-data
+                android:name="com.android.settings.title"
+                android:resource="@string/gms_settings_name" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/gms_settings_summary" />
+        </activity-alias>
+
         <activity-alias
             android:name="com.google.android.gms.mdm.settings.FindMyDeviceSettingsActivity"
             android:process=":ui"
@@ -957,6 +992,40 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <!-- Account settings activity-alias for Settings app account details -->
+        <activity-alias
+            android:name="com.google.android.gms.accountsettings.mg.ui.main.MainActivity"
+            android:enabled="@bool/ia_settings_enabled"
+            android:exported="false"
+            android:label="@string/pref_google_account_title"
+            android:process=":ui"
+            android:targetActivity="org.microg.gms.accountsettings.ui.MainActivity"
+            android:taskAffinity="org.microg.gms.settings">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.account_detail" />
+            <meta-data
+                android:name="com.android.settings.ia.account"
+                android:value="com.google" />
+            <meta-data
+                android:name="com.android.settings.title"
+                android:resource="@string/pref_google_account_title" />
+            <meta-data
+                android:name="com.android.settings.icon"
+                android:resource="@android:color/transparent" />
+            <meta-data
+                android:name="com.android.settings.intent.action"
+                android:value="com.google.android.gms.accountsettings.MY_ACCOUNT" />
+            <meta-data
+                android:name="com.android.settings.new_task"
+                android:value="true" />
+        </activity-alias>
 
         <activity
             android:name="org.microg.gms.accountsettings.ui.LoaderActivity"
